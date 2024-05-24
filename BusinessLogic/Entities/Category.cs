@@ -2,14 +2,10 @@
 {
     public enum Categories
     {
-        Electronics = 1,
-        Sport,
-        Fashion,
-        HomeAndGarden,
-        Transport,
-        ToysAndHobbies,
-        MusicalInstruments,
-        Art,
+        Gasoline = 1,
+        Diesel,
+        Hybrid,
+        Electric,
         Other
     }
     public class Category

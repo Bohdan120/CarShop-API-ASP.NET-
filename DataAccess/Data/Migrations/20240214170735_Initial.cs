@@ -198,11 +198,16 @@ namespace DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    .Annotation("SqlServer:Identity", "1, 1"),
+                    Make = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Model = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Year = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Discount = table.Column<int>(type: "int", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false, defaultValue: 9),
+                    Mileage = table.Column<int>(type: "int", nullable: false),
+                    FuelType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Engine = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Horsepower = table.Column<int>(type: "int", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     InStock = table.Column<bool>(type: "bit", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false)
@@ -247,15 +252,11 @@ namespace DataAccess.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Electronics" },
-                    { 2, "Sport" },
-                    { 3, "Fashion" },
-                    { 4, "Home & Garden" },
-                    { 5, "Transport" },
-                    { 6, "Toys & Hobbies" },
-                    { 7, "Musical Instruments" },
-                    { 8, "Art" },
-                    { 9, "Other" }
+                    { 1, "Gasoline" },
+                    { 2, "Diesel" },
+                    { 3, "Hybrid" },
+                    { 4, "Electric" },
+                    { 5, "Other" }             
                 });
 
             migrationBuilder.InsertData(
