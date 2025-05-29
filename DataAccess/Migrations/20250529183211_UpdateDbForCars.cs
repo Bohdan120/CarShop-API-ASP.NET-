@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class UpdateDbForCars : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -32,7 +32,6 @@ namespace DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Birthdate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -180,7 +179,7 @@ namespace DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    TotalPrice = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -194,29 +193,49 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Products",
+                name: "RefreshTokens",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
-                    .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Token = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RefreshTokens", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RefreshTokens_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Cars",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Make = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Model = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Year = table.Column<int>(type: "int", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Price = table.Column<double>(type: "float", nullable: false),
                     Mileage = table.Column<int>(type: "int", nullable: false),
-                    FuelType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Engine = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Horsepower = table.Column<int>(type: "int", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false, defaultValue: 5),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     InStock = table.Column<bool>(type: "bit", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.PrimaryKey("PK_Cars", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Products_Categories_CategoryId",
+                        name: "FK_Cars_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
@@ -224,7 +243,7 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrderProduct",
+                name: "CarOrder",
                 columns: table => new
                 {
                     OrdersId = table.Column<int>(type: "int", nullable: false),
@@ -232,17 +251,17 @@ namespace DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderProduct", x => new { x.OrdersId, x.ProductsId });
+                    table.PrimaryKey("PK_CarOrder", x => new { x.OrdersId, x.ProductsId });
                     table.ForeignKey(
-                        name: "FK_OrderProduct_Orders_OrdersId",
-                        column: x => x.OrdersId,
-                        principalTable: "Orders",
+                        name: "FK_CarOrder_Cars_ProductsId",
+                        column: x => x.ProductsId,
+                        principalTable: "Cars",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_OrderProduct_Products_ProductsId",
-                        column: x => x.ProductsId,
-                        principalTable: "Products",
+                        name: "FK_CarOrder_Orders_OrdersId",
+                        column: x => x.OrdersId,
+                        principalTable: "Orders",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -255,21 +274,20 @@ namespace DataAccess.Migrations
                     { 1, "Gasoline" },
                     { 2, "Diesel" },
                     { 3, "Hybrid" },
-                    { 4, "Electric" },
-                    { 5, "Other" }             
+                    { 4, "Electric" }
                 });
 
             migrationBuilder.InsertData(
-                table: "Products",
-                columns: new[] { "Id", "CategoryId", "Description", "Discount", "ImageUrl", "InStock", "Name", "Price" },
+                table: "Cars",
+                columns: new[] { "Id", "CategoryId", "Description", "Engine", "Horsepower", "ImageUrl", "InStock", "Make", "Mileage", "Model", "Price", "Year" },
                 values: new object[,]
                 {
-                    { 1, 1, null, 10, "https://applecity.com.ua/image/cache/catalog/0iphone/ipohnex/iphone-x-black-1000x1000.png", false, "iPhone X", 650m },
-                    { 2, 2, null, 0, "https://http2.mlstatic.com/D_NQ_NP_727192-CBT53879999753_022023-V.jpg", false, "PowerBall", 45.5m },
-                    { 3, 3, null, 15, "https://www.seekpng.com/png/detail/316-3168852_nike-air-logo-t-shirt-nike-t-shirt.png", true, "Nike T-Shirt", 189m },
-                    { 4, 1, null, 5, "https://sota.kh.ua/image/cache/data/Samsung-2/samsung-s23-s23plus-blk-01-700x700.webp", true, "Samsung S23", 1200m },
-                    { 5, 6, null, 0, "https://cdn.shopify.com/s/files/1/0046/1163/7320/products/69ee701e-e806-4c4d-b804-d53dc1f0e11a_grande.jpg", false, "Air Ball", 50m },
-                    { 6, 1, null, 10, "https://newtime.ua/image/import/catalog/mac/macbook_pro/MacBook-Pro-16-2019/MacBook-Pro-16-Space-Gray-2019/MacBook-Pro-16-Space-Gray-00.webp", true, "MacBook Pro 2019", 1200m }
+                    { 1, 3, "Silver color, Automatic transmission, Bluetooth, Backup Camera, Keyless Entry", "2.0L 4-cylinder", 169, "https://today.ua/wp-content/uploads/2021/12/Toyota-Corolla-1.jpg", true, "Toyota", 20000, "Corolla", 25000.0, 2022 },
+                    { 2, 3, "Red color, Manual transmission, Leather Seats, Navigation System, Heated Seats", "5.0L V8", 450, "https://img.automoto.ua/overview/ford-mustang-2020-3fd-huge-1564.jpg", true, "Ford", 15000, "Mustang", 35000.0, 2020 },
+                    { 3, 1, "White color, Automatic transmission, Sunroof, Adaptive Cruise Control, Parking Assistance", "2.0L 4-cylinder", 255, "https://hips.hearstapps.com/hmg-prod/images/2021-bmw-3-series-mmp-1-1593549868.jpg", true, "BMW", 12000, "3 Series", 40000.0, 2021 },
+                    { 4, 2, "Red color, Automatic transmission, Autopilot, Full Self-Driving Capability, Premium Audio System", "Electric Motor", 322, "https://cdn0.riastatic.com/photosnew/auto/photo/tesla_model-3__518635415f.jpg", true, "Tesla", 8000, "Model 3", 45000.0, 2022 },
+                    { 5, 3, "Gray color, Automatic transmission, Virtual Cockpit, Panoramic Sunroof, Apple CarPlay", "2.0L 4-cylinder", 248, "https://i.infocar.ua/i/12/6234/1400x936.jpg", true, "Audi", 15000, "Q5", 38000.0, 2021 },
+                    { 6, 3, "Silver color, Automatic transmission, MBUX Infotainment, Heated Steering Wheel, Air Suspension", "2.0L 4-cylinder", 255, "https://i.infocar.ua/i/2/6241/118625/1024x.jpg", true, "Mercedes-Benz", 18000, "E-Class", 42000.0, 2020 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -312,9 +330,14 @@ namespace DataAccess.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderProduct_ProductsId",
-                table: "OrderProduct",
+                name: "IX_CarOrder_ProductsId",
+                table: "CarOrder",
                 column: "ProductsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cars_CategoryId",
+                table: "Cars",
+                column: "CategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_UserId",
@@ -322,9 +345,9 @@ namespace DataAccess.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_CategoryId",
-                table: "Products",
-                column: "CategoryId");
+                name: "IX_RefreshTokens_UserId",
+                table: "RefreshTokens",
+                column: "UserId");
         }
 
         /// <inheritdoc />
@@ -346,22 +369,25 @@ namespace DataAccess.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "OrderProduct");
+                name: "CarOrder");
+
+            migrationBuilder.DropTable(
+                name: "RefreshTokens");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "Cars");
+
+            migrationBuilder.DropTable(
                 name: "Orders");
 
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Categories");
         }
     }
 }

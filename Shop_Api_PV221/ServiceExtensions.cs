@@ -9,11 +9,6 @@ using System.Text;
 
 namespace Shop_Api_PV221
 {
-    public static class Policies
-    {
-        public const string PREMIUM_CLIENT = "PremiumClient";
-        public const string ADULT = "Adult";
-    }
     public static class ServiceExtensions
     {
         public static void AddHangfire(this IServiceCollection services, string connectionString)
@@ -47,18 +42,6 @@ namespace Shop_Api_PV221
                         ClockSkew = TimeSpan.Zero
                     };
                 });
-
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy(Policies.PREMIUM_CLIENT, policy =>
-                    policy.RequireClaim("ClientType", ClientType.Premium.ToString()));
-            });
-
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy(Policies.ADULT, policy =>
-                    policy.Requirements.Add(new MinimumAgeRequirement(18)));
-            });
         }
     }
 }

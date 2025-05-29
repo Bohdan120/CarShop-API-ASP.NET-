@@ -61,6 +61,15 @@ namespace BusinessLogic {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Car not found.
+        /// </summary>
+        internal static string CarNotFound {
+            get {
+                return ResourceManager.GetString("CarNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Id must be positive:).
         /// </summary>
         internal static string IdMustPositive {
@@ -75,15 +84,6 @@ namespace BusinessLogic {
         internal static string InvalidToken {
             get {
                 return ResourceManager.GetString("InvalidToken", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Product not found..
-        /// </summary>
-        internal static string ProductNotFound {
-            get {
-                return ResourceManager.GetString("ProductNotFound", resourceCulture);
             }
         }
     }

@@ -8,10 +8,10 @@ namespace DataAccess.Repositories
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        internal ShopDbContext context;
+        internal DealershipDbContext context;
         internal DbSet<TEntity> dbSet;
 
-        public Repository(ShopDbContext context)
+        public Repository(DealershipDbContext context)
         {
             this.context = context;
             this.dbSet = context.Set<TEntity>();

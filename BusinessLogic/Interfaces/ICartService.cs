@@ -4,7 +4,7 @@ namespace BusinessLogic.Interfaces
 {
     public interface ICartService
     {
-        Task<IEnumerable<ProductDto>> GetProducts();
+        Task<IEnumerable<CarDto>> GetProducts();
         IEnumerable<int> GetProductIds();
         void Add(int id);
         void Remove(int id);

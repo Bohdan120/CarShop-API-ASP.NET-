@@ -5,13 +5,13 @@ using System.Reflection;
 
 namespace DataAccess.Data
 {
-    public class ShopDbContext : IdentityDbContext<User>
+    public class DealershipDbContext : IdentityDbContext<User>
     {
         //public DbSet<Product> Products { get; set; }
         //public DbSet<Category> Categories { get; set; }
         //public DbSet<Order> Orders { get; set; }
 
-        public ShopDbContext(DbContextOptions options) : base(options) 
+        public DealershipDbContext(DbContextOptions options) : base(options) 
         {
             Database.Migrate();
         }

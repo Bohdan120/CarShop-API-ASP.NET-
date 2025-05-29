@@ -11,9 +11,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccess.Migrations
 {
-    [DbContext(typeof(ShopDbContext))]
-    [Migration("20240524110254_changeFields2")]
-    partial class changeFields2
+    [DbContext(typeof(DealershipDbContext))]
+    [Migration("20250529183211_UpdateDbForCars")]
+    partial class UpdateDbForCars
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,167 @@ namespace DataAccess.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("CarOrder", b =>
+                {
+                    b.Property<int>("OrdersId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrdersId", "ProductsId");
+
+                    b.HasIndex("ProductsId");
+
+                    b.ToTable("CarOrder");
+                });
+
+            modelBuilder.Entity("DataAccess.Data.Entities.Car", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(5);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Engine")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Horsepower")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("InStock")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Make")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Mileage")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Model")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("Cars", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryId = 3,
+                            Description = "Silver color, Automatic transmission, Bluetooth, Backup Camera, Keyless Entry",
+                            Engine = "2.0L 4-cylinder",
+                            Horsepower = 169,
+                            ImageUrl = "https://today.ua/wp-content/uploads/2021/12/Toyota-Corolla-1.jpg",
+                            InStock = true,
+                            Make = "Toyota",
+                            Mileage = 20000,
+                            Model = "Corolla",
+                            Price = 25000.0,
+                            Year = 2022
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryId = 3,
+                            Description = "Red color, Manual transmission, Leather Seats, Navigation System, Heated Seats",
+                            Engine = "5.0L V8",
+                            Horsepower = 450,
+                            ImageUrl = "https://img.automoto.ua/overview/ford-mustang-2020-3fd-huge-1564.jpg",
+                            InStock = true,
+                            Make = "Ford",
+                            Mileage = 15000,
+                            Model = "Mustang",
+                            Price = 35000.0,
+                            Year = 2020
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CategoryId = 1,
+                            Description = "White color, Automatic transmission, Sunroof, Adaptive Cruise Control, Parking Assistance",
+                            Engine = "2.0L 4-cylinder",
+                            Horsepower = 255,
+                            ImageUrl = "https://hips.hearstapps.com/hmg-prod/images/2021-bmw-3-series-mmp-1-1593549868.jpg",
+                            InStock = true,
+                            Make = "BMW",
+                            Mileage = 12000,
+                            Model = "3 Series",
+                            Price = 40000.0,
+                            Year = 2021
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CategoryId = 2,
+                            Description = "Red color, Automatic transmission, Autopilot, Full Self-Driving Capability, Premium Audio System",
+                            Engine = "Electric Motor",
+                            Horsepower = 322,
+                            ImageUrl = "https://cdn0.riastatic.com/photosnew/auto/photo/tesla_model-3__518635415f.jpg",
+                            InStock = true,
+                            Make = "Tesla",
+                            Mileage = 8000,
+                            Model = "Model 3",
+                            Price = 45000.0,
+                            Year = 2022
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CategoryId = 3,
+                            Description = "Gray color, Automatic transmission, Virtual Cockpit, Panoramic Sunroof, Apple CarPlay",
+                            Engine = "2.0L 4-cylinder",
+                            Horsepower = 248,
+                            ImageUrl = "https://i.infocar.ua/i/12/6234/1400x936.jpg",
+                            InStock = true,
+                            Make = "Audi",
+                            Mileage = 15000,
+                            Model = "Q5",
+                            Price = 38000.0,
+                            Year = 2021
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CategoryId = 3,
+                            Description = "Silver color, Automatic transmission, MBUX Infotainment, Heated Steering Wheel, Air Suspension",
+                            Engine = "2.0L 4-cylinder",
+                            Horsepower = 255,
+                            ImageUrl = "https://i.infocar.ua/i/2/6241/118625/1024x.jpg",
+                            InStock = true,
+                            Make = "Mercedes-Benz",
+                            Mileage = 18000,
+                            Model = "E-Class",
+                            Price = 42000.0,
+                            Year = 2020
+                        });
+                });
 
             modelBuilder.Entity("DataAccess.Data.Entities.Category", b =>
                 {
@@ -75,8 +236,8 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("TotalPrice")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("TotalPrice")
+                        .HasColumnType("float");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -87,152 +248,6 @@ namespace DataAccess.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Orders", (string)null);
-                });
-
-            modelBuilder.Entity("DataAccess.Data.Entities.Product", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CategoryId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(5);
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Engine")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Horsepower")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("InStock")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Make")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Mileage")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Model")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("Year")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("Products", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CategoryId = 3,
-                            Description = "Silver color, Automatic transmission, Bluetooth, Backup Camera, Keyless Entry",
-                            Engine = "2.0L 4-cylinder",
-                            Horsepower = 169,
-                            ImageUrl = "https://today.ua/wp-content/uploads/2021/12/Toyota-Corolla-1.jpg",
-                            InStock = true,
-                            Make = "Toyota",
-                            Mileage = 20000,
-                            Model = "Corolla",
-                            Price = 25000m,
-                            Year = 2022
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CategoryId = 3,
-                            Description = "Red color, Manual transmission, Leather Seats, Navigation System, Heated Seats",
-                            Engine = "5.0L V8",
-                            Horsepower = 450,
-                            ImageUrl = "https://img.automoto.ua/overview/ford-mustang-2020-3fd-huge-1564.jpg",
-                            InStock = true,
-                            Make = "Ford",
-                            Mileage = 15000,
-                            Model = "Mustang",
-                            Price = 35000m,
-                            Year = 2020
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CategoryId = 1,
-                            Description = "White color, Automatic transmission, Sunroof, Adaptive Cruise Control, Parking Assistance",
-                            Engine = "2.0L 4-cylinder",
-                            Horsepower = 255,
-                            ImageUrl = "https://hips.hearstapps.com/hmg-prod/images/2021-bmw-3-series-mmp-1-1593549868.jpg",
-                            InStock = true,
-                            Make = "BMW",
-                            Mileage = 12000,
-                            Model = "3 Series",
-                            Price = 40000m,
-                            Year = 2021
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CategoryId = 2,
-                            Description = "Red color, Automatic transmission, Autopilot, Full Self-Driving Capability, Premium Audio System",
-                            Engine = "Electric Motor",
-                            Horsepower = 322,
-                            ImageUrl = "https://cdn0.riastatic.com/photosnew/auto/photo/tesla_model-3__518635415f.jpg",
-                            InStock = true,
-                            Make = "Tesla",
-                            Mileage = 8000,
-                            Model = "Model 3",
-                            Price = 45000m,
-                            Year = 2022
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CategoryId = 3,
-                            Description = "Gray color, Automatic transmission, Virtual Cockpit, Panoramic Sunroof, Apple CarPlay",
-                            Engine = "2.0L 4-cylinder",
-                            Horsepower = 248,
-                            ImageUrl = "https://i.infocar.ua/i/12/6234/1400x936.jpg",
-                            InStock = true,
-                            Make = "Audi",
-                            Mileage = 15000,
-                            Model = "Q5",
-                            Price = 38000m,
-                            Year = 2021
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CategoryId = 3,
-                            Description = "Silver color, Automatic transmission, MBUX Infotainment, Heated Steering Wheel, Air Suspension",
-                            Engine = "2.0L 4-cylinder",
-                            Horsepower = 255,
-                            ImageUrl = "https://i.infocar.ua/i/2/6241/118625/1024x.jpg",
-                            InStock = true,
-                            Make = "Mercedes-Benz",
-                            Mileage = 18000,
-                            Model = "E-Class",
-                            Price = 42000m,
-                            Year = 2020
-                        });
                 });
 
             modelBuilder.Entity("DataAccess.Data.Entities.RefreshToken", b =>
@@ -267,12 +282,6 @@ namespace DataAccess.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Birthdate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ClientType")
                         .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -465,19 +474,30 @@ namespace DataAccess.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("OrderProduct", b =>
+            modelBuilder.Entity("CarOrder", b =>
                 {
-                    b.Property<int>("OrdersId")
-                        .HasColumnType("int");
+                    b.HasOne("DataAccess.Data.Entities.Order", null)
+                        .WithMany()
+                        .HasForeignKey("OrdersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<int>("ProductsId")
-                        .HasColumnType("int");
+                    b.HasOne("DataAccess.Data.Entities.Car", null)
+                        .WithMany()
+                        .HasForeignKey("ProductsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
 
-                    b.HasKey("OrdersId", "ProductsId");
+            modelBuilder.Entity("DataAccess.Data.Entities.Car", b =>
+                {
+                    b.HasOne("DataAccess.Data.Entities.Category", "Category")
+                        .WithMany("Cars")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasIndex("ProductsId");
-
-                    b.ToTable("OrderProduct");
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("DataAccess.Data.Entities.Order", b =>
@@ -489,17 +509,6 @@ namespace DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("DataAccess.Data.Entities.Product", b =>
-                {
-                    b.HasOne("DataAccess.Data.Entities.Category", "Category")
-                        .WithMany("Products")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("DataAccess.Data.Entities.RefreshToken", b =>
@@ -564,24 +573,9 @@ namespace DataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("OrderProduct", b =>
-                {
-                    b.HasOne("DataAccess.Data.Entities.Order", null)
-                        .WithMany()
-                        .HasForeignKey("OrdersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DataAccess.Data.Entities.Product", null)
-                        .WithMany()
-                        .HasForeignKey("ProductsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("DataAccess.Data.Entities.Category", b =>
                 {
-                    b.Navigation("Products");
+                    b.Navigation("Cars");
                 });
 
             modelBuilder.Entity("DataAccess.Data.Entities.User", b =>

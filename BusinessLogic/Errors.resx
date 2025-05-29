@@ -117,13 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CarNotFound" xml:space="preserve">
+    <value>Car not found</value>
+  </data>
   <data name="IdMustPositive" xml:space="preserve">
     <value>Id must be positive:)</value>
   </data>
   <data name="InvalidToken" xml:space="preserve">
     <value>Invalid token.</value>
-  </data>
-  <data name="ProductNotFound" xml:space="preserve">
-    <value>Product not found.</value>
   </data>
 </root>

@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Specifications
 {
-    internal static class ProductSpecs
+    internal static class CarSpecs
     {
-        internal class ById : Specification<Product>
+        internal class ById : Specification<Car>
         {
             public ById(int id)
             {
@@ -19,14 +19,14 @@ namespace BusinessLogic.Specifications
                     .Include(x => x.Category);
             }
         }
-        internal class All : Specification<Product>
+        internal class All : Specification<Car>
         {
             public All()
             {
                 Query.Include(x => x.Category);
             }
         }
-        internal class ByIds : Specification<Product>
+        internal class ByIds : Specification<Car>
         {
             public ByIds(IEnumerable<int> ids)
             {

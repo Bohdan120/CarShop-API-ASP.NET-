@@ -10,15 +10,15 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Data.Configurations
 {
-    public class ProductEntityConfigs : IEntityTypeConfiguration<Product>
+    public class CarEntityConfigs : IEntityTypeConfiguration<Car>
     {
-        public void Configure(EntityTypeBuilder<Product> builder)
+        public void Configure(EntityTypeBuilder<Car> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.ToTable("Products");
+            builder.ToTable("Cars");
 
             builder
-                .HasOne(x => x.Category).WithMany(x => x.Products).HasForeignKey(x => x.CategoryId);
+                .HasOne(x => x.Category).WithMany(x => x.Cars).HasForeignKey(x => x.CategoryId);
             builder
                 .Property(x => x.CategoryId).HasDefaultValue((int)Categories.Other);
         }

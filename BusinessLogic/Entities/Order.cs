@@ -6,7 +6,7 @@
         public DateTime Date { get; set; }
         public string UserId { get; set; }
         public User? User { get; set; }
-        public decimal TotalPrice { get; set; }
-        public ICollection<Product>? Products { get; set; }
+        public double TotalPrice { get; set; }
+        public ICollection<Car>? Products { get; set; }
     }
 }

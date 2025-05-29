@@ -12,7 +12,7 @@ namespace DataAccess
     {
         public static void AddDbContext(this IServiceCollection services, string connectionString)
         {
-            services.AddDbContext<ShopDbContext>(opts => opts.UseSqlServer(connectionString));
+            services.AddDbContext<DealershipDbContext>(opts => opts.UseSqlServer(connectionString));
         }
 
         public static void AddRepositories(this IServiceCollection services)
@@ -27,7 +27,7 @@ namespace DataAccess
                 options.SignIn.RequireConfirmedAccount = false;
             })
                .AddDefaultTokenProviders()
-               .AddEntityFrameworkStores<ShopDbContext>();
+               .AddEntityFrameworkStores<DealershipDbContext>();
         }
     }
        

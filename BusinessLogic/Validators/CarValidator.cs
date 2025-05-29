@@ -4,9 +4,9 @@ using FluentValidation;
 
 namespace BusinessLogic.Validators
 {
-    public class ProductValidator : AbstractValidator<ProductDto>
+    public class CarValidator : AbstractValidator<CarDto>
     {
-        public ProductValidator()
+        public CarValidator()
         {
             //RuleFor(x => x.Name)
             //    .NotEmpty()

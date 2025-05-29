@@ -12,10 +12,10 @@ namespace Shop_Api_PV221.Services
     public class CartService : ICartService
     {
         const string key = "cart_items_key";
-        private readonly IProductsService productsService;
+        private readonly ICarsService productsService;
         private readonly HttpContext httpContext;
 
-        public CartService(IProductsService productsService, IHttpContextAccessor contextAccessor)
+        public CartService(ICarsService productsService, IHttpContextAccessor contextAccessor)
         {
             this.productsService = productsService;
             httpContext = contextAccessor.HttpContext ?? throw new Exception();
@@ -38,7 +38,7 @@ namespace Shop_Api_PV221.Services
             SaveCartItems(ids);
         }
 
-        public async Task<IEnumerable<ProductDto>> GetProducts()
+        public async Task<IEnumerable<CarDto>> GetProducts()
         {
             var ids = GetCartItems();
             return await productsService.Get(ids);

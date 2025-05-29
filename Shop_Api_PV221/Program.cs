@@ -28,7 +28,7 @@ builder.Services.AddIdentity();
 builder.Services.AddRepositories();
 
 builder.Services.AddAutoMapper();
-builder.Services.AddFluentValidators();
+//builder.Services.AddFluentValidators();
 
 builder.Services.AddCustomServices();
 builder.Services.AddScoped<ICartService, CartService>();

@@ -51,8 +51,6 @@ namespace BusinessLogic.Services
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id),
                 new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.DateOfBirth, user.Birthdate.ToString()),
-                new Claim("ClientType", user.ClientType.ToString())
             };
 
             var roles = userManager.GetRolesAsync(user).Result;

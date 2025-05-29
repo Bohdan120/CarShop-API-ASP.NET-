@@ -16,7 +16,7 @@ namespace BusinessLogic
             //services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddSingleton(provider => new MapperConfiguration(cfg =>
             {
-                cfg.AddProfile(new ApplicationProfile(provider.CreateScope().ServiceProvider.GetService<IFileService>()!));
+                cfg.AddProfile(new CarProfile(provider.CreateScope().ServiceProvider.GetService<IFileService>()!));
             }).CreateMapper());
         }
 
@@ -31,11 +31,11 @@ namespace BusinessLogic
 
         public static void AddCustomServices(this IServiceCollection services)
         {
-            services.AddScoped<IProductsService, ProductsService>();
+            services.AddScoped<ICarsService, CarsService>();
             services.AddScoped<IAccountsService, AccountsService>();
             services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<IOrdersService, OrdersService>();
-            services.AddScoped<IFileService, AzureFileService/*LocalFileService*/>();
+            services.AddScoped<IFileService, LocalFileService>();
             services.AddScoped<IEmailSender, MailJetSender>();
         }
     }

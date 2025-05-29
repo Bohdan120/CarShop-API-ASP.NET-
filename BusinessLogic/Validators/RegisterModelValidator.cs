@@ -13,11 +13,6 @@ namespace BusinessLogic.Validators
 
             RuleFor(x => x.Password)
                 .NotEmpty();
-
-            RuleFor(x => x.Birthdate)
-                .NotEmpty()
-                .GreaterThan(new DateTime(1900, 1, 1)).WithMessage("Birthdate must be bigger than 1900.")
-                .LessThan(DateTime.Now).WithMessage("Birthdate cannot be futura date.");
         }
     }
 }

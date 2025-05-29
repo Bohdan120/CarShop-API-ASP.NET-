@@ -13,14 +13,14 @@ namespace BusinessLogic.Services
     {
         private readonly IMapper mapper;
         private readonly IRepository<Order> orderR;
-        private readonly IRepository<Product> productR;
+        private readonly IRepository<Car> productR;
         private readonly ICartService cartService;
         private readonly IEmailSender emailSender;
         //private readonly IViewRender viewRender;
 
         public OrdersService(IMapper mapper, 
                             IRepository<Order> orderR,
-                            IRepository<Product> productR,
+                            IRepository<Car> productR,
                             ICartService cartService,
                             //IViewRender viewRender,
                             IEmailSender emailSender)
@@ -36,7 +36,7 @@ namespace BusinessLogic.Services
         public async Task Create(string userId)
         {
             var ids = cartService.GetProductIds();
-            var products = await productR.GetListBySpec(new ProductSpecs.ByIds(ids));
+            var products = await productR.GetListBySpec(new CarSpecs.ByIds(ids));
 
             var order = new Order()
             {
