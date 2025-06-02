@@ -19,6 +19,8 @@ namespace DataAccess.Repositories
         // get items by specification
         Task<TEntity?> GetItemBySpec(ISpecification<TEntity> specification);
         Task<IEnumerable<TEntity>> GetListBySpec(ISpecification<TEntity> specification);
+        Task<int> CountAsync(ISpecification<TEntity> specification);
+
 
         void Save();
     }

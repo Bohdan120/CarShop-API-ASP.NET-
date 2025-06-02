@@ -20,14 +20,20 @@ namespace Shop_Api_PV221.Controllers
         }
 
         [HttpGet("all")]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = Policies.ADULT)]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> GetAll([FromQuery] int page = 1, [FromQuery] int pageSize = 10,
+                                         [FromQuery] string? make = null, [FromQuery] string? category = null,
+                                         [FromQuery] string? sortDirection = null)
         {
-            return Ok(await carsService.GetAll());
+            var (cars, totalCount) = await carsService.GetAll(page, pageSize, make, category, sortDirection);
+
+            return Ok(new
+            {
+                items = cars,
+                totalCount
+            });
         }
 
-        //[Authorize] // based on cookies
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)] // based on JWT
+
         [HttpGet("{id:int}")]
         public async Task<IActionResult> Get([FromRoute]int id)
         {
@@ -35,7 +41,6 @@ namespace Shop_Api_PV221.Controllers
         }
 
         [HttpPost]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = Policies.PREMIUM_CLIENT)]
         public IActionResult Create([FromBody] CreateCarModel model)
         {
             carsService.Create(model);
@@ -44,14 +49,12 @@ namespace Shop_Api_PV221.Controllers
 
 
         [HttpPut]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Edit([FromBody] CarDto model)
         {
             carsService.Edit(model);
             return Ok();
         }
 
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = Roles.ADMIN)]
         [HttpDelete("{id:int}")]
         public IActionResult Delete([FromRoute]int id)
         {

@@ -74,5 +74,9 @@ namespace DataAccess.Repositories
             var evaluator = new SpecificationEvaluator();
             return evaluator.GetQuery(dbSet, specification);
         }
+        public async Task<int> CountAsync(ISpecification<TEntity> specification)
+        {
+            return await ApplySpecification(specification).CountAsync();
+        }
     }
 }

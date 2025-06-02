@@ -72,9 +72,23 @@ namespace BusinessLogic.Services
             return mapper.Map<List<CarDto>>(await carsR.GetListBySpec(new CarSpecs.ByIds(ids)));
         }
 
-        public async Task<IEnumerable<CarDto>> GetAll()
+        public async Task<(IEnumerable<CarDto> Cars, int TotalCount)> GetAll(int page, int pageSize, string? make, string? category, string? sortDirection)
         {
-            return mapper.Map<List<CarDto>>(await carsR.GetListBySpec(new CarSpecs.All()));
+            if (page <= 0 || pageSize <= 0)
+                throw new HttpException("Page and page size must be positive", HttpStatusCode.BadRequest);
+
+            var cars = await carsR.GetListBySpec(new CarSpecs.FilteredPagedSorted(page, pageSize, make, category, sortDirection));
+            var totalCount = await carsR.CountAsync(new CarSpecs.FilteredCount(make, category));
+
+            var carDtos = mapper.Map<List<CarDto>>(cars);
+            return (carDtos, totalCount);
+        }
+
+
+        public async Task<int> GetTotalCount()
+        {
+            var allCars = await carsR.GetListBySpec(new CarSpecs.All());
+            return allCars.Count();
         }
 
         public IEnumerable<CategoryDto> GetAllCategories()

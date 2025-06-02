@@ -35,5 +35,51 @@ namespace BusinessLogic.Specifications
                     .Include(x => x.Category);
             }
         }
+        internal class FilteredPagedSorted : Specification<Car>
+        {
+            public FilteredPagedSorted(int page, int pageSize, string? make, string? category, string? sortDirection)
+            {
+                Query.Include(x => x.Category);
+
+                if (!string.IsNullOrWhiteSpace(make))
+                {
+                    Query.Where(c => c.Make.ToLower() == make.ToLower());
+                }
+
+                if (!string.IsNullOrWhiteSpace(category))
+                {
+                    Query.Where(c => c.Category.Name.ToLower() == category.ToLower());
+                }
+
+                if (!string.IsNullOrWhiteSpace(sortDirection) && sortDirection.ToLower() == "desc")
+                {
+                    Query.OrderByDescending(c => c.Price);
+                }
+                else
+                {
+                    Query.OrderBy(c => c.Price);
+                }
+
+                Query.Skip((page - 1) * pageSize).Take(pageSize);
+            }
+        }
+        internal class FilteredCount : Specification<Car>
+        {
+            public FilteredCount(string? make, string? category)
+            {
+                if (!string.IsNullOrWhiteSpace(make))
+                {
+                    Query.Where(c => c.Make.ToLower() == make.ToLower());
+                }
+
+                if (!string.IsNullOrWhiteSpace(category))
+                {
+                    Query.Where(c => c.Category.Name.ToLower() == category.ToLower());
+                }
+            }
+        }
+
+
+
     }
 }
