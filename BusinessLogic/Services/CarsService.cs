@@ -95,5 +95,15 @@ namespace BusinessLogic.Services
         {
             return mapper.Map<List<CategoryDto>>(categoriesR.GetAll());
         }
+
+        public IEnumerable<string> GetAllMakes()
+        {
+            return carsR.GetAll()
+                        .Select(c => c.Make)
+                        .Distinct()
+                        .OrderBy(make => make)
+                        .ToList();
+        }
+
     }
 }

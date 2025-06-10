@@ -17,10 +17,18 @@ namespace DataAccess.Repositories
             this.dbSet = context.Set<TEntity>();
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public IEnumerable<TEntity> GetAll(params Expression<Func<TEntity, object>>[] includes)
         {
-            return dbSet.ToList();
+            IQueryable<TEntity> query = dbSet;
+
+            foreach (var include in includes)
+            {
+                query = query.Include(include);
+            }
+
+            return query.ToList();
         }
+
 
         public virtual TEntity GetById(object id)
         {

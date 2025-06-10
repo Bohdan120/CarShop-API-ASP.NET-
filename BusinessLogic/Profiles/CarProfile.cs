@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BusinessLogic.DTOs;
+using BusinessLogic.Entities;
 using BusinessLogic.Interfaces;
 using DataAccess.Data.Entities;
 using System;
@@ -29,6 +30,12 @@ namespace BusinessLogic.Profiles
 
             CreateMap<RegisterModel, User>()
                 .ForMember(x => x.UserName, opts => opts.MapFrom(s => s.Email));
+
+            CreateMap<Review, ReviewDto>()
+                .ForMember(dest => dest.Car, opt => opt.MapFrom(src => src.Car));
+
+            CreateMap<Car, CarShortDto>();
+
         }
     }
 }

@@ -5,7 +5,8 @@ namespace DataAccess.Repositories
 {
     public interface IRepository<TEntity> where TEntity : class
     {
-        IEnumerable<TEntity> GetAll();
+        IEnumerable<TEntity> GetAll(params Expression<Func<TEntity, object>>[] includes);
+
         //IEnumerable<TEntity> Get(
         //    Expression<Func<TEntity, bool>> filter = null,
         //    Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,

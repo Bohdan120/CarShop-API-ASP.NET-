@@ -10,5 +10,7 @@ namespace BusinessLogic.Interfaces
         void Remove(int id);
         int GetCount();
         bool IsExists(int id);
+        void Clear();
+
     }
 }

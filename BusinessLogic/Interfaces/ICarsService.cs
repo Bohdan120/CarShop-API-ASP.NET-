@@ -12,6 +12,7 @@ namespace BusinessLogic.Interfaces
         void Edit(CarDto product);
         void Delete(int id);
         public Task<int> GetTotalCount();
+        public IEnumerable<string> GetAllMakes();
 
     }
 }

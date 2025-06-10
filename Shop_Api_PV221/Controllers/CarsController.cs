@@ -33,7 +33,6 @@ namespace Shop_Api_PV221.Controllers
             });
         }
 
-
         [HttpGet("{id:int}")]
         public async Task<IActionResult> Get([FromRoute]int id)
         {
@@ -47,7 +46,6 @@ namespace Shop_Api_PV221.Controllers
             return Ok();
         }
 
-
         [HttpPut]
         public IActionResult Edit([FromBody] CarDto model)
         {
@@ -59,7 +57,7 @@ namespace Shop_Api_PV221.Controllers
         public IActionResult Delete([FromRoute]int id)
         {
             carsService.Delete(id);
-            return Ok();
+            return Ok(); 
         }
 
         [HttpGet("categories")]
@@ -67,5 +65,12 @@ namespace Shop_Api_PV221.Controllers
         {
             return Ok(carsService.GetAllCategories());
         }
+
+        [HttpGet("makes")]
+        public ActionResult<IEnumerable<string>> GetMakes()
+        {
+            return Ok(carsService.GetAllMakes());
+        }
+
     }
 }

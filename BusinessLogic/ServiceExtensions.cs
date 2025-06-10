@@ -37,6 +37,9 @@ namespace BusinessLogic
             services.AddScoped<IOrdersService, OrdersService>();
             services.AddScoped<IFileService, LocalFileService>();
             services.AddScoped<IEmailSender, MailJetSender>();
+            services.AddScoped<IReviewsService, ReviewsService>();
+
+            
         }
     }
 }

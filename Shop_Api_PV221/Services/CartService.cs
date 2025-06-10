@@ -66,5 +66,10 @@ namespace Shop_Api_PV221.Services
         {
             return GetCartItems();
         }
+
+        public void Clear()
+        {
+            SaveCartItems(new List<int>());
+        }
     }
 }

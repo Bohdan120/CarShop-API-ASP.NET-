@@ -32,7 +32,6 @@ namespace BusinessLogic.Services
 
         public string CreateToken(IEnumerable<Claim> claims)
         {
-            // TODO: make separate method
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.Key));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 

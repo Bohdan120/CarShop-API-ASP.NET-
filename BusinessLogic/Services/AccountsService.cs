@@ -1,17 +1,14 @@
 ﻿using AutoMapper;
 using BusinessLogic.DTOs;
+using BusinessLogic.Helpers;
 using BusinessLogic.Interfaces;
 using BusinessLogic.Specifications;
 using DataAccess.Data.Entities;
 using DataAccess.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Shop_Api_PV221;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Data;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLogic.Services
 {
@@ -38,21 +35,19 @@ namespace BusinessLogic.Services
 
         public async Task Register(RegisterModel model)
         {
-            // TODO: validation
-
-            // check user
             var user = await userManager.FindByEmailAsync(model.Email);
-
             if (user != null)
                 throw new HttpException("Email is already exists.", HttpStatusCode.BadRequest);
 
-            // create user
             var newUser = mapper.Map<User>(model);
             var result = await userManager.CreateAsync(newUser, model.Password);
 
             if (!result.Succeeded)
                 throw new HttpException(string.Join(" ", result.Errors.Select(x => x.Description)), HttpStatusCode.BadRequest);
+
+            await userManager.AddToRoleAsync(newUser, Roles.USER);
         }
+
 
         public async Task<LoginResponseDto> Login(LoginModel model)
         {

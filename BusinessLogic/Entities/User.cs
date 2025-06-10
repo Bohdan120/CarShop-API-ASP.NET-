@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using BusinessLogic.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace DataAccess.Data.Entities
 {
@@ -7,5 +8,6 @@ namespace DataAccess.Data.Entities
     {
         public ICollection<Order>? Orders { get; set; }
         public ICollection<RefreshToken>? RefreshTokens { get; set; }
+        public ICollection<Review>? Reviews { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using BusinessLogic.Entities;
+using Microsoft.AspNetCore.Mvc.ViewEngines;
+using System.ComponentModel.DataAnnotations;
 
 namespace DataAccess.Data.Entities
 {
@@ -19,5 +21,7 @@ namespace DataAccess.Data.Entities
         public string ImageUrl { get; set; }
 
         public ICollection<Order>? Orders { get; set; }
+        public ICollection<Review>? Reviews { get; set; }
+
     }
 }
