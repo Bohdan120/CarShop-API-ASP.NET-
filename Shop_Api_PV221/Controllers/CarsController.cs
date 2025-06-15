@@ -18,7 +18,7 @@ namespace Shop_Api_PV221.Controllers
         {
             this.carsService = carsService;
         }
-
+        
         [HttpGet("all")]
         public async Task<IActionResult> GetAll([FromQuery] int page = 1, [FromQuery] int pageSize = 10,
                                          [FromQuery] string? make = null, [FromQuery] string? category = null,

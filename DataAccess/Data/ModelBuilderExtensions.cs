@@ -306,7 +306,7 @@ namespace DataAccess.Data
                     Horsepower = 235,
                     CategoryId = 2,
                     InStock = true,
-                    ImageUrl = "https://i.infocar.ua/i/12/6078/1400x936.jpg",
+                    ImageUrl = "https://carsguide-res.cloudinary.com/image/upload/c_fit,h_841,w_1490,f_auto,t_cg_base/v1/editorial/2020-Lexus-NX-300h-F-Sport-1001x565-(2).jpg",
                     Description = "Black color, Automatic transmission, Lexus Enform, Power Liftgate, Heated Front Seats"
                 },
                 new Car()
@@ -402,36 +402,6 @@ namespace DataAccess.Data
                 new Car()
                 {
                     Id = 26,
-                    Make = "sdfg",
-                    Model = "sdg",
-                    Year = 454,
-                    Price = 456456,
-                    Mileage = 456456,
-                    Engine = "fgsd",
-                    Horsepower = 6456,
-                    CategoryId = 3,
-                    InStock = true,
-                    ImageUrl = "assets/images/car.jpg",
-                    Description = ""
-                },
-                new Car()
-                {
-                    Id = 27,
-                    Make = "Ford",
-                    Model = "Escape",
-                    Year = 2021,
-                    Price = 30000,
-                    Mileage = 12000,
-                    Engine = "2.5L 4-cylinder Hybrid",
-                    Horsepower = 200,
-                    CategoryId = 3,
-                    InStock = true,
-                    ImageUrl = "https://hips.hearstapps.com/hmg-prod/images/2021-ford-escape-phev-108-1651779562.jpg?crop=0.843xw:0.631xh;0.0753xw,0.336xh&resize=1200:*",
-                    Description = "Gray color, CVT transmission, Ford Co-Pilot360, Wireless Charging Pad, Hands-Free Liftgate"
-                },
-                new Car()
-                {
-                    Id = 28,
                     Make = "Mercedes-Benz",
                     Model = "S-Class",
                     Year = 2016,
@@ -446,7 +416,7 @@ namespace DataAccess.Data
                 },
                 new Car()
                 {
-                    Id = 29,
+                    Id = 27,
                     Make = "BMW",
                     Model = "4 Series",
                     Year = 2021,
@@ -461,22 +431,7 @@ namespace DataAccess.Data
                 },
                 new Car()
                 {
-                    Id = 30,
-                    Make = "Honda",
-                    Model = "Accord",
-                    Year = 2022,
-                    Price = 32000,
-                    Mileage = 8000,
-                    Engine = "1.5L 4-cylinder",
-                    Horsepower = 192,
-                    CategoryId = 3,
-                    InStock = true,
-                    ImageUrl = "https://www.ixbt.com/img/n1/news/2023/1/2/2022-honda-accord-sport-2-0t-15_large.png",
-                    Description = "Silver color, Automatic transmission, Honda Sensing Suite, Apple CarPlay, Android Auto"
-                },
-                new Car()
-                {
-                    Id = 31,
+                    Id = 28,
                     Make = "Volvo",
                     Model = "XC90",
                     Year = 2020,
@@ -491,22 +446,7 @@ namespace DataAccess.Data
                 },
                 new Car()
                 {
-                    Id = 32,
-                    Make = "Lexus",
-                    Model = "NX",
-                    Year = 2020,
-                    Price = 38000,
-                    Mileage = 15000,
-                    Engine = "2.0L 4-cylinder",
-                    Horsepower = 235,
-                    CategoryId = 2,
-                    InStock = true,
-                    ImageUrl = "https://i.infocar.ua/i/12/6078/1400x936.jpg",
-                    Description = "Black color, Automatic transmission, Lexus Enform, Power Liftgate, Heated Front Seats"
-                },
-                new Car()
-                {
-                    Id = 33,
+                    Id = 29,
                     Make = "Ford",
                     Model = "Explorer",
                     Year = 2022,
@@ -516,7 +456,7 @@ namespace DataAccess.Data
                     Horsepower = 300,
                     CategoryId = 3,
                     InStock = true,
-                    ImageUrl = "https://fordmaster.com/upload/iblock/1e8/1e8262201ccfa5f479bef3a7b4020218.jpg",
+                    ImageUrl = "https://media.ed.edmunds-media.com/ford/explorer/2020/oem/2020_ford_explorer_4dr-suv_limited-hybrid_fq_oem_1_1600.jpg",
                     Description = "Red color, Automatic transmission, Ford Co-Pilot360, Sync 4 Infotainment, Tri-Zone Climate Control"
                 },
             });

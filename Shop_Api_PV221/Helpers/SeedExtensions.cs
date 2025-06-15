@@ -68,16 +68,16 @@ namespace Shop_Api_PV221.Helpers
 
             var goodComments = new[]
             {
-                "An absolute beast! Smooth and flawless ride.",
-                "Very satisfied with the purchase, excellent service.",
-                "Perfect family car – safe and comfortable.",
-                "The car looks even better in real life!",
-                "Impressed by the quality and features.",
-                "Fast delivery, professional staff.",
-                "Everything’s great! Will definitely buy here again.",
-                "Great performance, no complaints at all.",
-                "Feels like brand new – highly recommended!",
-                "Amazing value for the condition and mileage."
+                "Справжній звір! Плавна та бездоганна поїздка.",
+                "Дуже задоволений покупкою, відмінний сервіс.",
+                "Ідеальний сімейний автомобіль – безпечний та комфортний.",
+                "Автомобіль виглядає ще краще в реальному житті!",
+                "Вражений якістю та функціями.",
+                "Швидка доставка, професійний персонал.",
+                "Все чудово! Однозначно купуватиму тут знову.",
+                "Відмінна продуктивність, жодних нарікань.",
+                "Відчувається як абсолютно новий – настійно рекомендую!",
+                "Дивовижна цінність за такий стан та пробіг."
             };
 
             var rnd = new Random();
